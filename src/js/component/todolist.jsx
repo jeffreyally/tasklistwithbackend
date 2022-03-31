@@ -64,10 +64,7 @@ export const TodoList = (props) => {
 		//Runs only on the first render
 		GetDB(modifyTask);
 	}, []);
-	useEffect(() => {
-		//Runs on the first render
-		//And any time any dependency value changes
-	}, [taskList]);
+
 	//update modifyTask to setTaskList in the future
 	let saveTask = (e) => {
 		if (e.keyCode == 13) {

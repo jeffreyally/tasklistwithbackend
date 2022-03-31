@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Todolist } from "./todolist.jsx";
 let URL = `https://3000-jeffreyally-tasklistwith-2becw0mjhk0.ws-us38.gitpod.io/tasks`;
 let DeleteTask = (modifyTask, id) => {
@@ -18,7 +18,7 @@ let DeleteTask = (modifyTask, id) => {
 			//here is were your code should start after the fetch finishes
 			console.log(data); //this will print on the console the exact object received from the server
 			modifyTask(data);
-			return data;
+			//return data;
 		})
 		.catch((error) => {
 			//error handling
@@ -28,50 +28,56 @@ let DeleteTask = (modifyTask, id) => {
 };
 
 export const TasksWithDeleteIcon = (props) => {
+	useEffect(() => {
+		//Runs on the first render
+		//And any time any dependency value changes
+		return () => {
+			null;
+		};
+	}, [props.tList]);
 	return (
 		<>
 			<ol type="1">
-				{props.tlist.length == 0
-					? null
-					: props.tlist.map((maptask, makespanIDtheindex) => {
-							return (
-								<>
-									<br></br>
-									<li>
-										<span
-											className="thetask"
-											id={makespanIDtheindex}>
-											{maptask.task}
+				{props.tlist.map((maptask, makespanIDtheindex) => {
+					return (
+						<>
+							<br></br>
+							<li>
+								<span
+									className="thetask"
+									id={makespanIDtheindex}>
+									{maptask.task}
 
-											<i
-												className="fa fa-trash"
-												onClick={(e) =>
-													props.modlist(
-														// props.tlist.filter(
-														// 	(
-														// 		eachtask,
-														// 		eachtaskindex
-														// 	) => {
-														// 		//this is where I think I will delete one task from the todo list
-														// 		//(PUT request?)
-														// 		return (
-														// 			eachtaskindex !=
-														// 			makespanIDtheindex
-														// 		);
-														// 	}
-														// )
-														DeleteTask(
-															props.modlist,
-															maptask.id,
-															props.URL
-														)
-													)
-												}></i>
-										</span>
-									</li>
-								</>
-							);
-					  })}
+									<i
+										className="fa fa-trash"
+										onClick={(e) =>
+											//props.modlist(
+											// props.tlist.filter(
+											// 	(
+											// 		eachtask,
+											// 		eachtaskindex
+											// 	) => {
+											// 		//this is where I think I will delete one task from the todo list
+											// 		//(PUT request?)
+											// 		return (
+											// 			eachtaskindex !=
+											// 			makespanIDtheindex
+											// 		);
+											// 	}
+											// )
+
+											//)
+											DeleteTask(
+												props.modlist,
+												maptask.id,
+												props.URL
+											)
+										}></i>
+								</span>
+							</li>
+						</>
+					);
+				})}
 			</ol>
 		</>
 	);
