@@ -88,11 +88,7 @@ export const TodoList = (props) => {
 						value={inputTask}
 						onChange={(e) => setInputTask(e.target.value)}></input>
 				</div>
-				<TasksWithDeleteIcon
-					tlist={taskList}
-					modlist={modifyTask}
-					URL={URL}
-				/>
+				<TasksWithDeleteIcon tlist={taskList} modlist={modifyTask} />
 			</div>
 		</>
 	);
